@@ -22,13 +22,20 @@
 - (id)init{
     if (self = [super init]) {
         _app = [self createDemoApp];
-        //[self.view addSubview:_app.view];
     }
     return self;
 }
 //This was copied from the RESideMenu DemoAppDelegate
 -(RESideMenu*)createDemoApp{
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[DEMOFirstViewController alloc] init]];
+    
+    //Offset the Navigation Bar to Make Room for the DemoNC
+    CGRect originalFrame = navigationController.navigationBar.frame;
+    //CGRect newFrame = CGRectOffset(originalFrame, 0, originalFrame.size.height);
+    originalFrame.size.height = 150;
+    CGRect newFrame = originalFrame;
+    [navigationController.navigationBar setFrame:newFrame];
+    
     DEMOLeftMenuViewController *leftMenuViewController = [[DEMOLeftMenuViewController alloc] init];
     DEMORightMenuViewController *rightMenuViewController = [[DEMORightMenuViewController alloc] init];
     
@@ -36,8 +43,8 @@
                                                                     leftMenuViewController:leftMenuViewController
                                                                    rightMenuViewController:rightMenuViewController];
     sideMenuViewController.backgroundImage = [UIImage imageNamed:@"Stars"];
-    sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
-    //sideMenuViewController.delegate = self;
+    sideMenuViewController.menuPreferredStatusBarStyle = UIStatusBarStyleLightContent;
+    sideMenuViewController.delegate = self;
     sideMenuViewController.contentViewShadowColor = [UIColor blackColor];
     sideMenuViewController.contentViewShadowOffset = CGSizeMake(0, 0);
     sideMenuViewController.contentViewShadowOpacity = 0.6;
@@ -56,14 +63,8 @@
 -(UIImage*)appImage{
     return [UIImage imageNamed:@"RESideMenuScreenShot.png"];
 }
--(BOOL)launchAppFromViewController:(UIViewController *)viewController{
-    NSLog(@"Launching RE Side Menu");
-    _homeVC = viewController;
-    [_homeVC.view addSubview:_app.view];
-    return YES;
-}
--(void)closeApp{
-    [_app.view removeFromSuperview];
+-(UIViewController*)mainViewController{
+    return _app;
 }
 
 #pragma mark -
