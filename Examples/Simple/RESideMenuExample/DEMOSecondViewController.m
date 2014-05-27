@@ -26,7 +26,7 @@
     
     [self.view addSubview:({
         UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        button.frame = CGRectMake(0, 84, self.view.frame.size.width, 44);
+        button.frame = CGRectMake(0, 84, self.view.frame.size.width, 84);
         button.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [button setTitle:@"Push View Controller" forState:UIControlStateNormal];
         [button addTarget:self action:@selector(pushViewController:) forControlEvents:UIControlEventTouchUpInside];
@@ -47,7 +47,10 @@
     [super viewWillAppear:animated];
     NSLog(@"DEMOSecondViewController will appear");
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+    //Offset the navigation bar in the demo to accomodate for the app navigation bar
+    [self.navigationController.navigationBar setFrame:CGRectMake(0, 20, 320, 94)];
+}
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];

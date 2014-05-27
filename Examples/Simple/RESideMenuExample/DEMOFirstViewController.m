@@ -26,6 +26,7 @@
                                                                              style:UIBarButtonItemStylePlain
                                                                             target:self
                                                                             action:@selector(presentRightMenuViewController:)];
+
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -39,7 +40,10 @@
     [super viewWillAppear:animated];
     NSLog(@"DEMOFirstViewController will appear");
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+    //Offset the navigation bar in the demo to accomodate for the app navigation bar
+    [self.navigationController.navigationBar setFrame:CGRectMake(0, 20, 320, 94)];
+}
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];

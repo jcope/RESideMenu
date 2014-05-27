@@ -29,13 +29,6 @@
 -(RESideMenu*)createDemoApp{
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[DEMOFirstViewController alloc] init]];
     
-    //Offset the Navigation Bar to Make Room for the DemoNC
-    CGRect originalFrame = navigationController.navigationBar.frame;
-    //CGRect newFrame = CGRectOffset(originalFrame, 0, originalFrame.size.height);
-    originalFrame.size.height = 150;
-    CGRect newFrame = originalFrame;
-    [navigationController.navigationBar setFrame:newFrame];
-    
     DEMOLeftMenuViewController *leftMenuViewController = [[DEMOLeftMenuViewController alloc] init];
     DEMORightMenuViewController *rightMenuViewController = [[DEMORightMenuViewController alloc] init];
     
